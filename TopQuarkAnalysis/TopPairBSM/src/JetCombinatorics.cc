@@ -10,7 +10,7 @@
 ________________________________________________________________**/
 
 
-#include "JetCombinatorics.h"
+#include "TopQuarkAnalysis/TopPairBSM/interface/JetCombinatorics.h"
 #include "TMath.h"
 
 #include <iostream>

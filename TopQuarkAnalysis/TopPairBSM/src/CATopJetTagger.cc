@@ -1,5 +1,5 @@
-#include "CATopJetTagger.h"
-#include "CATopJetHelper.h"
+#include "TopQuarkAnalysis/TopPairBSM/interface/CATopJetTagger.h"
+#include "TopQuarkAnalysis/TopPairBSM/interface/CATopJetHelper.h"
 #include "AnalysisDataFormats/TopObjects/interface/CATopJetTagInfo.h"
 
 using namespace std;

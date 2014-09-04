@@ -1,4 +1,4 @@
-#include "BoostedTopProducer.h"
+#include "TopQuarkAnalysis/TopPairBSM/interface/BoostedTopProducer.h"
 #include "PhysicsTools/CandUtils/interface/AddFourMomenta.h"
 
 #include <string>
