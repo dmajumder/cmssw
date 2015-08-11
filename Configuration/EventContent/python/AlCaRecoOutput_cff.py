@@ -67,6 +67,7 @@ from Calibration.HcalAlCaRecoProducers.ALCARECOHcalCalIterativePhiSym_Output_cff
 # HCAL calibration with min.bias
 from Calibration.HcalAlCaRecoProducers.ALCARECOHcalCalMinBias_Output_cff import *
 from Calibration.HcalAlCaRecoProducers.ALCARECOHcalCalMinBiasHI_Output_cff import *
+from Calibration.HcalAlCaRecoProducers.ALCARECOHcalCalPedestal_Output_cff import * 
 # HCAL calibration with Zmuu (HO)
 #  include "Calibration/HcalAlCaRecoProducers/data/ALCARECOHcalCalZMuMu_Output.cff"
 from Calibration.HcalAlCaRecoProducers.ALCARECOHcalCalHO_Output_cff import *
@@ -111,3 +112,19 @@ from Calibration.TkAlCaRecoProducers.ALCARECOSiStripPCLHistos_Output_cff import 
 # stream for the LumiPixels workflow
 from Calibration.TkAlCaRecoProducers.ALCARECOLumiPixels_Output_cff import *
 from Calibration.TkAlCaRecoProducers.ALCARECOLumiPixelsMinBias_Output_cff import *
+
+###############################################################
+# hotline skim workflows
+###############################################################
+from Calibration.Hotline.hotlineSkims_Output_cff import *
+
+ALCARECOEventContent = cms.PSet(
+    outputCommands = cms.untracked.vstring('drop *',
+        'keep edmTriggerResults_*_*_*'),
+    splitLevel = cms.untracked.int32(0),
+    eventAutoFlushCompressedSize=cms.untracked.int32(5*1024*1024)
+)
+
+
+
+ALCARECOEventContent.outputCommands.append('drop *_MEtoEDMConverter_*_*')
