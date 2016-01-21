@@ -35,6 +35,12 @@ namespace vlq{
         prunedMass_(-1000), 
         softDropMass_(-1000), 
         nsubjets_  (-1000), 
+        hadronFlavourSubjet0_(-1000), 
+        hadronFlavourSubjet1_(-1000), 
+        ptSubjet0_(-1000), 
+        ptSubjet1_(-1000), 
+        etaSubjet0_(-1000), 
+        etaSubjet1_(-1000), 
         csvSubjet0_(-1000), 
         csvSubjet1_(-1000), 
         groomedMassCorr_(-1000), 
@@ -64,6 +70,12 @@ namespace vlq{
         prunedMass_(jet.getPrunedMass()),
         softDropMass_(jet.getSoftDropMass()),
         nsubjets_  (jet.getNSubjets()),  
+        hadronFlavourSubjet0_(jet.getHadronFlavourSubjet0()),  
+        hadronFlavourSubjet1_(jet.getHadronFlavourSubjet1()),  
+        ptSubjet0_(jet.getPtSubjet0()),  
+        ptSubjet1_(jet.getPtSubjet1()),  
+        etaSubjet0_(jet.getEtaSubjet0()),  
+        etaSubjet1_(jet.getEtaSubjet1()),  
         csvSubjet0_(jet.getCSVSubjet0()),  
         csvSubjet1_(jet.getCSVSubjet1()),  
         groomedMassCorr_(jet.getGroomedMassCorr()),  
@@ -75,32 +87,38 @@ namespace vlq{
     { } 
       ~Jet () {}
 
-      int    getIndex () const { return index_ ; } 
-      int    getPartonFlavour () const { return partonFlavour_ ; } 
-      int    getHadronFlavour () const { return hadronFlavour_ ; } 
-      double getCSV () const { return csvDiscrimiator_ ; }
-      double getNHF     () const { return nhf_     ;}
-      double getCHF     () const { return chf_     ;}
-      double getEMF     () const { return emf_     ;}
-      double getPHF     () const { return phf_     ;}
-      double getMUF     () const { return muf_     ;}
-      int    getNConsts () const { return nconsts_ ;}
-      double getTau1         () const { return tau1_          ; }
-      double getTau2         () const { return tau2_          ; }
-      double getTau3         () const { return tau3_          ; }
-      double getFilteredMass () const { return filteredMass_  ; }
-      double getTrimmedMass () const { return  trimmedMass_ ; }
-      double getPrunedMass () const { return prunedMass_ ; }
-      double getSoftDropMass () const { return softDropMass_ ; }
-      int    getNSubjets   () const { return nsubjets_   ; } 
-      double getCSVSubjet0 () const { return csvSubjet0_ ; } 
-      double getCSVSubjet1 () const { return csvSubjet1_ ; } 
-      double getGroomedMassCorr () const { return groomedMassCorr_ ; } 
-      int    getNSubjetsBTaggedCSVL () const { return nsubjetsBTaggedCSVL_ ; } 
-      bool   getIsbtagged () const { return isbtagged_ ; } 
-      bool   getIstoptagged () const { return istoptagged_ ; }
-      bool   getIshtagged () const { return ishtagged_ ; }
-      bool   getIswtagged () const { return iswtagged_ ; } 
+      int    getIndex                 () const { return index_ ; } 
+      int    getPartonFlavour         () const { return partonFlavour_ ; } 
+      int    getHadronFlavour         () const { return hadronFlavour_ ; } 
+      double getCSV                   () const { return csvDiscrimiator_ ; }
+      double getNHF                   () const { return nhf_     ;}
+      double getCHF                   () const { return chf_     ;}
+      double getEMF                   () const { return emf_     ;}
+      double getPHF                   () const { return phf_     ;}
+      double getMUF                   () const { return muf_     ;}
+      int    getNConsts               () const { return nconsts_ ;}
+      double getTau1                  () const { return tau1_                 ; }
+      double getTau2                  () const { return tau2_                 ; }
+      double getTau3                  () const { return tau3_                 ; }
+      double getFilteredMass          () const { return filteredMass_         ; }
+      double getTrimmedMass           () const { return  trimmedMass_         ; }
+      double getPrunedMass            () const { return prunedMass_           ; }
+      double getSoftDropMass          () const { return softDropMass_         ; }
+      int    getNSubjets              () const { return nsubjets_             ; } 
+      double getHadronFlavourSubjet0  () const { return hadronFlavourSubjet0_ ; } 
+      double getHadronFlavourSubjet1  () const { return hadronFlavourSubjet1_ ; } 
+      double getPtSubjet0             () const { return ptSubjet0_ ; } 
+      double getPtSubjet1             () const { return ptSubjet1_ ; } 
+      double getEtaSubjet0            () const { return etaSubjet0_ ; } 
+      double getEtaSubjet1            () const { return etaSubjet1_ ; } 
+      double getCSVSubjet0            () const { return csvSubjet0_ ; } 
+      double getCSVSubjet1            () const { return csvSubjet1_ ; } 
+      double getGroomedMassCorr       () const { return groomedMassCorr_ ; } 
+      int    getNSubjetsBTaggedCSVL   () const { return nsubjetsBTaggedCSVL_ ; } 
+      bool   getIsbtagged             () const { return isbtagged_ ; } 
+      bool   getIstoptagged           () const { return istoptagged_ ; }
+      bool   getIshtagged             () const { return ishtagged_ ; }
+      bool   getIswtagged             () const { return iswtagged_ ; } 
 
       void setIndex                 ( const int& index                 ) {index_ = index ; } 
       void setPartonFlavour         ( const int& partonflavour         ) { partonFlavour_ = partonflavour ; } 
@@ -120,6 +138,12 @@ namespace vlq{
       void setPrunedMass            ( const double mass                ) { prunedMass_ = mass ; }
       void setSoftDropMass          ( const double mass                ) { softDropMass_ = mass ; }
       void setNSubjets              ( const int    nsubjets            ) { nsubjets_ = nsubjets; }
+      void setHadronFlavourSubjet0  ( const double hadronFlavourSubjet0) { hadronFlavourSubjet0_ = hadronFlavourSubjet0 ; }
+      void setHadronFlavourSubjet1  ( const double hadronFlavourSubjet1) { hadronFlavourSubjet1_ = hadronFlavourSubjet1 ; }
+      void setPtSubjet0             ( const double ptSubjet0           ) { ptSubjet0_ = ptSubjet0 ; }
+      void setPtSubjet1             ( const double ptSubjet1           ) { ptSubjet1_ = ptSubjet1 ; }
+      void setEtaSubjet0            ( const double etaSubjet0          ) { etaSubjet0_ = etaSubjet0 ; }
+      void setEtaSubjet1            ( const double etaSubjet1          ) { etaSubjet1_ = etaSubjet1 ; }
       void setCSVSubjet0            ( const double csvSubjet0          ) { csvSubjet0_ = csvSubjet0 ; }
       void setCSVSubjet1            ( const double csvSubjet1          ) { csvSubjet1_ = csvSubjet1 ; }
       void setGroomedMassCorr       ( const double groomedMassCorr     ) { groomedMassCorr_ = groomedMassCorr ; }
@@ -152,6 +176,12 @@ namespace vlq{
       double softDropMass_ ; 
 
       double nsubjets_ ; 
+      double hadronFlavourSubjet0_ ; 
+      double hadronFlavourSubjet1_ ; 
+      double ptSubjet0_ ; 
+      double ptSubjet1_ ; 
+      double etaSubjet0_ ; 
+      double etaSubjet1_ ; 
       double csvSubjet0_ ; 
       double csvSubjet1_ ; 
 
