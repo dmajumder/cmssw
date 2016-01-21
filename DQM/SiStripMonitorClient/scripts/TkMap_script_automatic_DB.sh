@@ -6,6 +6,17 @@ if [[ "$#" == "0" ]]; then
     exit 1;
 fi
 
+FORCE=0
+echo "OPTIND starts at $OPTIND"
+while getopts ":f" optname
+do
+      case $optname in
+	  f) FORCE=1
+	      ;;
+      esac
+done
+shift $(($OPTIND - 1))
+
 export WORKINGDIR=${CMSSW_BASE}/src
 
 cd ${WORKINGDIR}
@@ -18,27 +29,34 @@ do
 
     if [ "$Run_numb" == "$1" ]; then continue; fi
 
+    #Run2015A
+    if [ $Run_numb -gt 246907 ]; then
+	DataLocalDir='Data2015'
+        DataOfflineDir='Run2015'
+    else
+
     #2015 Commissioning period (since January)
     if [ $Run_numb -gt 232881 ]; then
-	DataLocalDir='Data2015'
-	DataOfflineDir='Commissioning2015'
+        DataLocalDir='Data2015'
+        DataOfflineDir='Commissioning2015'
     else
     #2013 pp run (2.76 GeV)
-	if [ $Run_numb -gt 211658 ]; then
-	    DataLocalDir='Data2013'
-	    DataOfflineDir='Run2013'
-	else
+        if [ $Run_numb -gt 211658 ]; then
+        DataLocalDir='Data2013'
+        DataOfflineDir='Run2013'
+        else
     #2013 HI run
-	    if [ $Run_numb -gt 209634 ]; then
-		DataLocalDir='Data2013'
-		DataOfflineDir='HIRun2013'
-	    else
-		if [ $Run_numb -gt 190450 ]; then
-		    DataLocalDir='Data2012'
-		    DataOfflineDir='Run2012'
-		fi
-	    fi
-	fi
+        if [ $Run_numb -gt 209634 ]; then
+            DataLocalDir='Data2013'
+            DataOfflineDir='HIRun2013'
+        else
+            if [ $Run_numb -gt 190450 ]; then
+            DataLocalDir='Data2012'
+            DataOfflineDir='Run2012'
+            fi
+        fi
+        fi
+    fi
     fi
     #loop over datasets
     #if Cosmics, do StreamExpressCosmics as well
@@ -74,8 +92,10 @@ do
 
     file_path="/tmp/"
 
+if [ $FORCE == 0 ]; then
     check_runcomplete ${file_path}/$dqmFileName
     if [ $? -ne 0 ]; then continue; fi
+fi
 
     echo Process ${file_path}/$dqmFileName
 
@@ -105,6 +125,7 @@ do
     rm -f *.log
     rm -f *.txt
     rm -f *.html
+    rm -f *.root
 
 # Determine the GlobalTag name used to process the data and the DQM
 
@@ -122,14 +143,15 @@ do
     fi
 
 #Temporary fix to remove hidden ASCII characters
-    GLOBALTAG=`echo $GLOBALTAG | cut -c 9-16`
+    GLOBALTAG=`echo $GLOBALTAG | cut -c 9-${#GLOBALTAG}`
 #    GLOBALTAG=`sed -i 's/[\d128-\d255]//g' <<< "${GLOBALTAG}"`
 #    GLOBALTAG=`echo $GLOBALTAG | sed 's/[\d128-\d255]//'`
 #    echo `expr length $GLOBALTAG`
 
     echo " Creating the TrackerMap.... "
 
-    cmsRun ${CMSSW_BASE}/src/DQM/SiStripMonitorClient/test/SiStripDQM_OfflineTkMap_Template_cfg_DB.py print globalTag=${GLOBALTAG} runNumber=${Run_numb} dqmFile=${file_path}/$dqmFileName  # update GlobalTag
+    detIdInfoFileName=`echo TkDetIdInfo_Run${Run_numb}_${thisDataset}.root`
+    cmsRun ${CMSSW_BASE}/src/DQM/SiStripMonitorClient/test/SiStripDQM_OfflineTkMap_Template_cfg_DB.py print globalTag=${GLOBALTAG} runNumber=${Run_numb} dqmFile=${file_path}/$dqmFileName detIdInfoFile=${detIdInfoFileName} # update GlobalTag
 
 # rename bad module list file
 
@@ -163,7 +185,8 @@ do
     fi
 
 ## Producing the PrimaryVertex/BeamSpot quality test by LS..
-    if [ $thisDataset == "MinimumBias" -o $thisDataset == "Jet" ]; then	
+    #if [ $thisDataset == "MinimumBias" -o $thisDataset == "Jet" ]; then	
+    if [ "$thisDataset" != "Cosmics" ]  &&  [ "$thisDataset" != "StreamExpress" ]  &&  [ "$thisDataset" != "StreamExpressCosmics" ]; then
 	echo " Creating the BeamSpot Calibration certification summary:"
 
 	lsbs_cert  ${file_path}/$dqmFileName
@@ -194,6 +217,9 @@ do
 
 #    mkdir -p /data/users/event_display/${DataLocalDir}/${dest}/${nnn}/${Run_numb}/$thisDataset 2> /dev/null
 #    cp -r ${Run_numb}/$thisDataset /data/users/event_display/Data2011/${dest}/${nnn}/${Run_numb}/
+    ssh cctrack@vocms061 "mkdir -p /data/users/event_display/TkCommissioner_runs/${DataLocalDir}/${dest} 2> /dev/null"
+    scp *.root cctrack@vocms061:/data/users/event_display/TkCommissioner_runs/${DataLocalDir}/${dest}
+    rm *.root
     ssh cctrack@vocms061 "mkdir -p /data/users/event_display/${DataLocalDir}/${dest}/${nnn}/${Run_numb}/$thisDataset 2> /dev/null"
     scp -r * cctrack@vocms061:/data/users/event_display/${DataLocalDir}/${dest}/${nnn}/${Run_numb}/$thisDataset
 

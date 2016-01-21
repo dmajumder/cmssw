@@ -318,7 +318,8 @@ class AddJetCollection(ConfigToolBase):
                 _newPatJetFlavourAssociation.rParam=rParam
                 _newPatJetFlavourAssociation.bHadrons=cms.InputTag("patJetPartons"+postfix,"bHadrons")
                 _newPatJetFlavourAssociation.cHadrons=cms.InputTag("patJetPartons"+postfix,"cHadrons")
-                _newPatJetFlavourAssociation.partons=cms.InputTag("patJetPartons"+postfix,"partons")
+                _newPatJetFlavourAssociation.partons=cms.InputTag("patJetPartons"+postfix,"physicsPartons")
+                _newPatJetFlavourAssociation.leptons=cms.InputTag("patJetPartons"+postfix,"leptons")
             else :
                 setattr(process, 'patJetFlavourAssociation'+_labelName+postfix,
                         patJetFlavourAssociation.clone(
@@ -327,7 +328,8 @@ class AddJetCollection(ConfigToolBase):
                             rParam=rParam,
                             bHadrons = cms.InputTag("patJetPartons"+postfix,"bHadrons"),
                             cHadrons = cms.InputTag("patJetPartons"+postfix,"cHadrons"),
-                            partons = cms.InputTag("patJetPartons"+postfix,"partons")
+                            partons = cms.InputTag("patJetPartons"+postfix,"physicsPartons"),
+                            leptons = cms.InputTag("patJetPartons"+postfix,"leptons")
                         )
                 )
                 knownModules.append('patJetFlavourAssociation'+_labelName+postfix)
@@ -465,16 +467,8 @@ class AddJetCollection(ConfigToolBase):
                         setattr(process, btagInfo+_labelName+postfix, btag.softMuonTagInfos.clone(jets = jetSource, primaryVertex=pvSource))
                     if btagInfo == 'softPFMuonsTagInfos':
                         setattr(process, btagInfo+_labelName+postfix, btag.softPFMuonsTagInfos.clone(jets = jetSource, primaryVertex=pvSource, muons=muSource))
-                    if btagInfo == 'softPFMuonsTagInfosAK8':
-                        setattr(process, btagInfo+_labelName+postfix, btag.softPFMuonsTagInfosAK8.clone(jets = jetSource, primaryVertex=pvSource, muons=muSource))
-                    if btagInfo == 'softPFMuonsTagInfosCA15':
-                        setattr(process, btagInfo+_labelName+postfix, btag.softPFMuonsTagInfosCA15.clone(jets = jetSource, primaryVertex=pvSource, muons=muSource))
                     if btagInfo == 'softPFElectronsTagInfos':
                         setattr(process, btagInfo+_labelName+postfix, btag.softPFElectronsTagInfos.clone(jets = jetSource, primaryVertex=pvSource, electrons=elSource))
-                    if btagInfo == 'softPFElectronsTagInfosAK8':
-                        setattr(process, btagInfo+_labelName+postfix, btag.softPFElectronsTagInfosAK8.clone(jets = jetSource, primaryVertex=pvSource, electrons=elSource))
-                    if btagInfo == 'softPFElectronsTagInfosCA15':
-                        setattr(process, btagInfo+_labelName+postfix, btag.softPFElectronsTagInfosCA15.clone(jets = jetSource, primaryVertex=pvSource, electrons=elSource))
                     acceptedTagInfos.append(btagInfo)
                 elif hasattr(toptag, btagInfo) :
                     acceptedTagInfos.append(btagInfo)
