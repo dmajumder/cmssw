@@ -15,12 +15,15 @@
  <version ClassVersion="10" checksum="1103100465"/>
 </class>
 
-<class name="vlq::Electron" ClassVersion="11">
+<class name="vlq::Electron" ClassVersion="13">
+ <version ClassVersion="13" checksum="3404036929"/>
+ <version ClassVersion="12" checksum="1472572748"/>
  <version ClassVersion="11" checksum="3340555617"/>
  <version ClassVersion="10" checksum="3761153883"/>
 </class>
 
-<class name="vlq::Muon" ClassVersion="10">
+<class name="vlq::Muon" ClassVersion="11">
+ <version ClassVersion="11" checksum="2866834110"/>
  <version ClassVersion="10" checksum="1991137193"/>
 </class>
 

@@ -18,8 +18,6 @@ namespace vlq{
         vlq::Candidate(mu),
         index_                   (mu.getIndex                   () ),   
         Charge_                  (mu.getCharge                  () ), 
-        D0_                      (mu.getD0                      () ), 
-        D0err_                   (mu.getD0err                   () ), 
         Dxy_                     (mu.getDxy                     () ), 
         Dxyerr_                  (mu.getDxyerr                  () ), 
         Dz_                      (mu.getDz                      () ), 
@@ -60,8 +58,6 @@ namespace vlq{
 
       int   getIndex                   () const { return index_                   ; }
       float getCharge                  () const { return Charge_                  ; }
-      float getD0                      () const { return D0_                      ; }
-      float getD0err                   () const { return D0err_                   ; }
       float getDxy                     () const { return Dxy_                     ; }
       float getDxyerr                  () const { return Dxyerr_                  ; }
       float getDz                      () const { return Dz_                      ; }
@@ -100,8 +96,6 @@ namespace vlq{
 
       void setIndex                   (const int& index)                      {index_ = index                                       ; } 
       void setCharge                  (const float& Charge)                   { Charge_ = Charge                                    ; }
-      void setD0                      (const float& D0)                       { D0_ = D0                                            ; }
-      void setD0err                   (const float& D0err)                    { D0err_ = D0err                                      ; }
       void setDxy                     (const float& Dxy)                      { Dxy_ = Dxy                                          ; }
       void setDxyerr                  (const float& Dxyerr)                   { Dxyerr_ = Dxyerr                                    ; }
       void setDz                      (const float& Dz)                       { Dz_ = Dz                                            ; }
@@ -142,8 +136,6 @@ namespace vlq{
 
       int   index_                   ;
       float Charge_                  ;
-      float D0_                      ;
-      float D0err_                   ;
       float Dxy_                     ;
       float Dxyerr_                  ;
       float Dz_                      ;

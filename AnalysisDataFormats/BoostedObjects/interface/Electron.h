@@ -18,7 +18,7 @@ namespace vlq{
         vlq::Candidate(el),
         index_             (el.getIndex             () ),  
         Charge_            (el.getCharge            () ), 
-        D0_                (el.getD0                () ), 
+        Dxy_               (el.getDxy               () ), 
         Dz_                (el.getDz                () ), 
         E_                 (el.getE                 () ), 
         Eta_               (el.getEta               () ), 
@@ -30,6 +30,7 @@ namespace vlq{
         Pt_                (el.getPt                () ), 
         Y_                 (el.getY                 () ), 
         dEtaIn_            (el.getdEtaIn            () ), 
+        dEtaInSeed_        (el.getdEtaInSeed        () ), 
         dPhiIn_            (el.getdPhiIn            () ), 
         full5x5siee_       (el.getfull5x5siee       () ), 
         hasMatchedConVeto_ (el.gethasMatchedConVeto () ), 
@@ -46,7 +47,7 @@ namespace vlq{
 
       int getIndex () const { return index_ ; }
       float getCharge () const { return Charge_ ; } 
-      float getD0 () const { return D0_ ; } 
+      float getDxy () const { return Dxy_ ; } 
       float getDz () const { return Dz_ ; } 
       float getE () const { return E_ ; } 
       float getEta () const { return Eta_ ; } 
@@ -58,6 +59,7 @@ namespace vlq{
       float getPt () const { return Pt_ ; } 
       float getY () const { return Y_ ; } 
       float getdEtaIn () const { return dEtaIn_ ; } 
+      float getdEtaInSeed () const { return dEtaInSeed_ ; } 
       float getdPhiIn () const { return dPhiIn_ ; } 
       float getfull5x5siee () const { return full5x5siee_ ; } 
       float gethasMatchedConVeto () const { return hasMatchedConVeto_ ; } 
@@ -72,7 +74,7 @@ namespace vlq{
 
       void setIndex (const int& index) {index_ = index ; } 
       void setCharge (const float Charge) {Charge_ = Charge ;} 
-      void setD0 (const float D0) {D0_ = D0 ;} 
+      void setDxy(const float Dxy) {Dxy_ = Dxy ;} 
       void setDz (const float Dz) {Dz_ = Dz ;} 
       void setE (const float E) {E_ = E ;} 
       void setEta (const float Eta) {Eta_ = Eta ;} 
@@ -84,6 +86,7 @@ namespace vlq{
       void setPt (const float Pt) {Pt_ = Pt ;} 
       void setY (const float Y) {Y_ = Y ;} 
       void setdEtaIn (const float dEtaIn) {dEtaIn_ = dEtaIn ;} 
+      void setdEtaInSeed (const float dEtaInSeed) {dEtaInSeed_ = dEtaInSeed ;} 
       void setdPhiIn (const float dPhiIn) {dPhiIn_ = dPhiIn ;} 
       void setfull5x5siee (const float full5x5siee) {full5x5siee_ = full5x5siee ;} 
       void sethasMatchedConVeto (const float hasMatchedConVeto) {hasMatchedConVeto_ = hasMatchedConVeto ;}
@@ -99,7 +102,7 @@ namespace vlq{
     private: 
       int index_ ; 
       float Charge_ ;
-      float D0_ ;
+      float Dxy_ ;
       float Dz_ ;
       float E_ ;
       float Eta_ ;
@@ -111,6 +114,7 @@ namespace vlq{
       float Pt_ ;
       float Y_ ;
       float dEtaIn_ ;
+      float dEtaInSeed_ ;
       float dPhiIn_ ;
       float full5x5siee_ ;
       float hasMatchedConVeto_;
