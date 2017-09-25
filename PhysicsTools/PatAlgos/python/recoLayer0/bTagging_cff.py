@@ -38,7 +38,7 @@ supportedBtagInfos = [
   , 'pfDeepCMVAPositiveTagInfos'
     # TopTagInfos (unrelated to b tagging)
   , 'caTopTagInfos'
-  , 'pfDeepTagInfos'
+  , 'pfDeepFlavourTagInfos'
   ]
 # extend for "internal use" in PAT/MINIAOD (renaming)
 supportedBtagInfos.append( 'caTopTagInfosPAT' )
