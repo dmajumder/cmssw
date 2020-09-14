@@ -80,8 +80,8 @@ void DeepFlavourONNXJetTagsProducer::fillDescriptions(edm::ConfigurationDescript
   desc.add<edm::InputTag>("src", edm::InputTag("pfDeepFlavourTagInfos"));
   desc.add<std::vector<std::string>>("input_names", {"input_1", "input_2", "input_3", "input_4", "input_5"});
   desc.add<edm::FileInPath>("model_path",
-                            edm::FileInPath("RecoBTag/Combined/data/DeepFlavourV03_10X_training/model.onnx"));
-  desc.add<std::vector<std::string>>("output_names", {"ID_pred/Softmax:0"});
+                            edm::FileInPath("RecoBTag/Combined/data/DeepFlavour_Phase2/model.onnx"));
+  desc.add<std::vector<std::string>>("output_names", {});
   desc.add<std::vector<std::string>>(
       "flav_names", std::vector<std::string>{"probb", "probbb", "problepb", "probc", "probuds", "probg"});
 
